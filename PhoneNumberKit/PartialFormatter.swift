@@ -100,7 +100,7 @@ public final class PartialFormatter {
         // Convert number to latin
         var latinRawNumber = rawNumber
         if #available(iOSApplicationExtension 9.0, *) {
-            latinRawNumber = rawNumber.applyingTransform(StringTransform.toLatin, reverse: false) ?? rawNumber
+            latinRawNumber = rawNumber.applyingTransform(.toLatin, reverse: false) ?? rawNumber
         }
 
         // Always reset variables with each new raw number
@@ -141,7 +141,7 @@ public final class PartialFormatter {
         finalNumber.append(split.pausesOrWaits)
         if containsArabic {
             if #available(iOSApplicationExtension 9.0, *) {
-                finalNumber = finalNumber.applyingTransform(StringTransform.latinToArabic, reverse: false) ?? finalNumber
+                finalNumber = finalNumber.applyingTransform(.latinToArabic, reverse: false) ?? finalNumber
             }
         }
         return finalNumber

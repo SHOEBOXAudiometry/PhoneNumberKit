@@ -37,7 +37,7 @@ final class ParseManager {
         // Convert number to latin
         var latinNumberString = numberString
         if #available(iOSApplicationExtension 9.0, *) {
-            latinNumberString = numberString.applyingTransform(StringTransform.toLatin, reverse: false) ?? numberString
+            latinNumberString = numberString.applyingTransform(.toLatin, reverse: false) ?? numberString
         }
 
         var nationalNumber = latinNumberString
