@@ -99,7 +99,7 @@ public final class PartialFormatter {
 
         // Convert number to latin
         var latinRawNumber = rawNumber
-        if #available(iOSApplicationExtension 9.0, *) {
+        if #available(iOS 9.0, *) {
             latinRawNumber = rawNumber.applyingTransform(.toLatin, reverse: false) ?? rawNumber
         }
 
@@ -107,7 +107,7 @@ public final class PartialFormatter {
         self.resetVariables()
 
         guard self.isValidRawNumber(latinRawNumber) else {
-            return latinRawNumber
+            return rawNumber
         }
         let split = splitNumberAndPausesOrWaits(latinRawNumber)
         
@@ -139,10 +139,8 @@ public final class PartialFormatter {
             finalNumber = String(finalNumber[..<finalNumber.index(before: finalNumber.endIndex)])
         }
         finalNumber.append(split.pausesOrWaits)
-        if containsArabic {
-            if #available(iOSApplicationExtension 9.0, *) {
-                finalNumber = finalNumber.applyingTransform(.latinToArabic, reverse: false) ?? finalNumber
-            }
+        if containsArabic, #available(iOS 9.0, *) {
+            finalNumber = finalNumber.applyingTransform(.latinToArabic, reverse: false) ?? finalNumber
         }
         return finalNumber
     }
